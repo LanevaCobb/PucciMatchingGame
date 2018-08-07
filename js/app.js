@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
- var cards = ['fa-diamond', 'fa-diamond',
+var cards = ['fa-diamond', 'fa-diamond',
               'fa-paper-plane-o', 'fa-paper-plane-o',
               'fa-anchor', 'fa-anchor',
               'fa-bolt', 'fa-bolt',
@@ -52,14 +52,14 @@ function shuffle(array) {
  */
 //Adds event listener for all the cards
 var timer = document.querySelector('.timer');
-var starList = document.querySelectorAll('.stars li');
-var flipCards = [];
+const starList = document.querySelectorAll('.stars li');
+let flipCards = [];
 var moves = 0;
 var moveCount = document.querySelector('.moves');
 var time = 0;
 var timerInt;
-var stopTimer;
-var time_off = true;
+var stopTimer
+var timer_off = true;
 var stars = document.querySelectorAll('.fa-star');
 var close_x = document.querySelector('.close');
 
@@ -70,33 +70,19 @@ function initGame(){
       return createCard(card);
     });
 
-    deck.innerHTML = cardHTML.join('');
+      deck.innerHTML = cardHTML.join('');
 
-    moves = 0;
-    moveCount.innerHTML = moves;
+      moves = 0;
+      moveCount.innerHTML = moves;
 
-    function clearStar() {
-      for (star of starList) {
-        if (star.style.display !== 'none') {
-          star.style.display = 'none';
-          break;
-        }
-      }
-    }
+      sec = 0;
+      min = 0;
+      hour = 0;
 
-    clearStar();
-
-    sec = 0;
-    min = 0;
-    hour = 0;
-
-    timer.innerHTML = "0 minutes 0 seconds";
-
-
+      timer.innerHTML = "0 minutes 0 seconds";
 }
 
 initGame();
-clearInterval(timerInt);
 
 
 const deckCards = document.querySelectorAll('.card');
@@ -104,6 +90,13 @@ const deckCards = document.querySelectorAll('.card');
 deckCards.forEach(function(card) {
    card.addEventListener('click', function(event) {
      const clickTarget = event.target;
+
+    // if card had been clicked on twice; it will not be added to the array.
+     if (
+       clickTarget.classList.contains('card') &&
+       flipCards.length < 2 &&
+       !flipCards.includes(clickTarget)
+     )
 
      if (!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')) {
         flipCards.push(card);
@@ -140,22 +133,33 @@ deckCards.forEach(function(card) {
             movesText.innerHTML = moves;
           }
         }
-    };
-  });
-});
+     };
+   });
+ });
 
 
 function score() {
-  if (moves == 34 || moves == 34) {
+  if (moves == 12 || moves == 24) {
    clearStar();
  }
 }
+
+function clearStar() {
+  for (star of starList) {
+    if (star.style.display !== 'none') {
+        star.style.display = 'none';
+          break;
+        }
+    }
+}
+
 
 var min = 0;
 var sec = 0;
 var hour = 0;
 function startTimer() {
- var timerInt = setInterval(() => {
+ timer_off =  false;
+ timerInt = setInterval(() => {
    time++;
    timer.innerHTML = min+'minutes '+sec+'seconds';
    sec++;
@@ -180,6 +184,13 @@ function showTime() {
 
 function stopTimer() {
   clearInterval(timerInt);
+  time = 0;
+  timer_off = true;
+}
+
+function resetGame() {
+  initGame();
+  stopTimer();
 }
 
 function toggle_modal() {
@@ -187,29 +198,43 @@ function toggle_modal() {
   modal.classList.toggle('popup_hide');
 }
 
-function you_did_it(){
-  if ((flipCards[0].classList.add('match') == flipCards[1].classList.add('match')) == 8 ){
-    stopTimer();
-    finish_time = timer.innerHTML;
-
-
-    modal.classList.add('show');
-
-    var rating = document.querySelector('stars').innerHTML
-
-    document.getElementById(move).innerHTML = moves;
-    document.getElementById(rating).innerHTML = star_rating;
-    document.getElementById(final_time).innerHTML = finish_time;
-
-    close_modal();
-  };
-}
-
-function close_modal(){
-  close_x.addEventListener('click', function(event){
-    modal.classlist.remove('show');
-    initGame();
-  });
-}
-
 toggle_modal();
+stats();
+
+final_stars = score();
+
+function stats() {
+  const timeStat = document.querySelector('.popup_timer');
+  const final_time = document.querySelector('time');
+  const final_moves = document.querySelector('.popup_moves');
+
+  final_moves.innerHTML = `You made ${moves} moves`;
+  timeStat.innerHTML = `in ${final_time}`;
+}
+
+let matchedCards = 0;
+const pairs = 8;
+
+function checkMate() {
+  if (flipCards[0].firstElementChild.className === flipCards[1].firstElementChild.className) {
+
+      flipCards[0].classList.toggle('match');
+      flipCards[1].classList.toggle('match');
+
+      flipCards = [];
+      matchedCards++;
+  }
+}
+
+checkMate();
+
+
+if(matchedCards === pairs){
+  gameWon();
+}
+
+function gameWon() {
+  stopTimer();
+  stats();
+  toggle_modal();
+}

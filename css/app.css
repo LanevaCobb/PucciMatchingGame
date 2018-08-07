@@ -117,8 +117,8 @@ h1 {
 
 .popup_body {
   position: relative;
-  height: 600px;
-  width: 900px;
+  height: 500px;
+  width: 800px;
   left: 50%;
   top: 50%;
   background: #ffffff;
@@ -145,23 +145,23 @@ h1 {
 }
 
 .great_job {
-  font-size: 40px;
+  font-size: 30px;
 }
 
  .popup_moves {
-   font-size: 40px;
+   font-size: 30px;
  }
 
  p {
-   font-size: 40px;
+   font-size: 30px;
  }
 
  .popup_timer {
-   font-size: 40px;
+   font-size: 30px;
  }
 
  .star_rating {
-   font-size: 40px;
+   font-size: 30px;
  }
 
 .popup_button {
@@ -173,7 +173,7 @@ h1 {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 50px;
+    font-size: 30px;
     width: 70%;
 }
 
