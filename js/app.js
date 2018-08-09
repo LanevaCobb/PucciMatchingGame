@@ -227,7 +227,6 @@ if(matchedCards === pairs){
 }
 
 function gameWon() {
-  stopTimer();
   stats();
   toggle_modal();
 }
