@@ -58,7 +58,7 @@ var moves = 0;
 var moveCount = document.querySelector('.moves');
 var time = 0;
 var timerInt;
-var stopTimer
+
 var timer_off = true;
 var stars = document.querySelectorAll('.fa-star');
 var close_x = document.querySelector('.close');
@@ -80,6 +80,8 @@ function initGame(){
       hour = 0;
 
       timer.innerHTML = "0 minutes 0 seconds";
+      clearInterval(timerInt);
+
 }
 
 initGame();
@@ -182,16 +184,7 @@ function showTime() {
   timer.innerHTML= time;
 }
 
-function stopTimer() {
-  clearInterval(timerInt);
-  time = 0;
-  timer_off = true;
-}
 
-function resetGame() {
-  initGame();
-  stopTimer();
-}
 
 function toggle_modal() {
   var modal = document.querySelector('.popup');
@@ -226,7 +219,7 @@ function checkMate() {
   }
 }
 
-checkMate();
+
 
 
 if(matchedCards === pairs){
