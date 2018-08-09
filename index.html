@@ -26,9 +26,9 @@
 
           <span class="timer">0:00</span>
 
-            <div class="restart" onclick="initGame()", "stopTimer()">
+            <div class="restart" onclick="initGame();">
         		<i class="fa fa-repeat"></i>
-        	</div>
+        	  </div>
         </section>
 
         <ul class="deck"></ul>
@@ -36,14 +36,14 @@
           <div class="popup_body">
               <div class="popup_header">
                 <h1 class="popup_title">You did it!!!</h1>
-                <span class="close_button">X</span>
+                <button class="close_button" onclick="toggle_modal();">X</button>
               </div>
               <div class="praise">
                 <div class="great_job">Great Job!</div>
-                <p>You made <span class="popup_moves"> </span> moves </p>
-                <p> in<span class="popup_timer">Time</span> </p>
-                <span class="star_rating">Rating:</span>
-                <button class="popup_button">Play Again? :)</button>
+                <span class="popup_moves">Moves</span>
+                <span class="popup_timer">Time</span>
+                <div class="star_rating">Rating:</div>
+                <button class="popup_button" onclick="resetGame(); toggle_modal();">Play Again? :)</button>
               </div>
             </div>
           <div class="popup_hide"></div>
