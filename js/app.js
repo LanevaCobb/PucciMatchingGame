@@ -57,15 +57,19 @@ let flipCards = [];
 var moves = 0;
 var moveCount = document.querySelector('.moves');
 var time = 0;
-var timerInt;
-
+let timerInt;
+let card = document.getElementsByClassName("card");
+var deck = document.querySelector('.deck');
+let matchedCards = document.getElementsByClassName("match");
 var timer_off = true;
 var stars = document.querySelectorAll('.fa-star');
 var close_x = document.querySelector('.close');
 
 
+
+
 function initGame(){
-      var deck = document.querySelector('.deck');
+
       var cardHTML = shuffle(cards).map(function(card) {
       return createCard(card);
     });
@@ -81,6 +85,7 @@ function initGame(){
 
       timer.innerHTML = "0 minutes 0 seconds";
       clearInterval(timerInt);
+      time=0;
 
 }
 
@@ -159,6 +164,7 @@ function clearStar() {
 var min = 0;
 var sec = 0;
 var hour = 0;
+
 function startTimer() {
  timer_off =  false;
  timerInt = setInterval(() => {
@@ -205,26 +211,20 @@ function stats() {
   timeStat.innerHTML = `in ${final_time}`;
 }
 
-let matchedCards = 0;
-const pairs = 8;
+matchedCards = 0;
 
 function checkMate() {
-  if (flipCards[0].firstElementChild.className === flipCards[1].firstElementChild.className) {
-
-      flipCards[0].classList.toggle('match');
-      flipCards[1].classList.toggle('match');
-
-      flipCards = [];
-      matchedCards++;
+  if(matchedCards.length == 16){
+    clearInterval(timerInt);
+    final_time = timer.innerHTML;
+    gameWon();
   }
 }
 
+for (var i = 0; i < deckCards.length; i++){
 
-
-
-if(matchedCards === pairs){
-  gameWon();
-}
+    deckCards[i].addEventListener('click', checkMate);
+};
 
 function gameWon() {
   stats();
