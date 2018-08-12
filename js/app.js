@@ -74,6 +74,8 @@ function initGame(){
       return createCard(card);
     });
 
+      clearInterval(timerInt);
+
       deck.innerHTML = cardHTML.join('');
 
       moves = 0;
@@ -84,8 +86,7 @@ function initGame(){
       hour = 0;
 
       timer.innerHTML = "0 minutes 0 seconds";
-      clearInterval(timerInt);
-      time=0;
+
 
 }
 
@@ -166,6 +167,7 @@ var sec = 0;
 var hour = 0;
 
 function startTimer() {
+  clearInterval(timerInt);
  timer_off =  false;
  timerInt = setInterval(() => {
    time++;
