@@ -66,17 +66,15 @@ var stars = document.querySelectorAll('.fa-star');
 var close_x = document.querySelector('.close');
 
 
-
-
 function initGame(){
-
-      var cardHTML = shuffle(cards).map(function(card) {
-      return createCard(card);
-    });
 
       clearInterval(timerInt);
 
-      deck.innerHTML = cardHTML.join('');
+      var cardHTML = shuffle(cards).map(function(card) {
+       return createCard(card);
+     });
+
+     deck.innerHTML = cardHTML.join('');
 
       moves = 0;
       moveCount.innerHTML = moves;
@@ -86,16 +84,13 @@ function initGame(){
       hour = 0;
 
       timer.innerHTML = "0 minutes 0 seconds";
-
-
 }
 
 initGame();
 
-
 const deckCards = document.querySelectorAll('.card');
 
-deckCards.forEach(function(card) {
+function clickDeck(){ deckCards.forEach(function(card) {
    card.addEventListener('click', function(event) {
      const clickTarget = event.target;
 
@@ -144,7 +139,9 @@ deckCards.forEach(function(card) {
      };
    });
  });
+}
 
+clickDeck();
 
 function score() {
   if (moves == 12 || moves == 24) {
@@ -223,10 +220,6 @@ function checkMate() {
   }
 }
 
-for (var i = 0; i < deckCards.length; i++){
-
-    deckCards[i].addEventListener('click', checkMate);
-};
 
 function gameWon() {
   stats();
