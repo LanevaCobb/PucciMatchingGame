@@ -208,7 +208,7 @@ function stats() {
   const final_time = timer.innerHTML;
   const final_moves = document.querySelector('.popup_moves');
   const final_rating = document.querySelector('.star_rating');
-  const final_stars = score().innerHTML;
+  const final_stars = score();
 
   final_moves.innerHTML = `You made ${moves} moves`;
   timeStat.innerHTML = `in ${final_time}`;
@@ -219,13 +219,13 @@ matchedCards = 0;
 
 function checkMate() {
   if(matchedCards.length === 16){
-    stopTimer();
     gameWon();
   }
 }
 checkMate();
 
 function gameWon() {
+  stopTimer();
   stats();
   toggle_modal();
 }
