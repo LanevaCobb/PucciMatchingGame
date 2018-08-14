@@ -189,6 +189,10 @@ function showTime() {
   timer.innerHTML= time;
 }
 
+function stopTimer() {
+  clearInterval(timerInt);
+}
+
 
 
 function toggle_modal() {
@@ -199,27 +203,27 @@ function toggle_modal() {
 toggle_modal();
 stats();
 
-final_stars = score();
-
 function stats() {
   const timeStat = document.querySelector('.popup_timer');
-  const final_time = document.querySelector('time');
+  const final_time = timer.innerHTML;
   const final_moves = document.querySelector('.popup_moves');
+  const final_rating = document.querySelector('.star_rating');
+  const final_stars = score().innerHTML;
 
   final_moves.innerHTML = `You made ${moves} moves`;
   timeStat.innerHTML = `in ${final_time}`;
+  final_rating.innerHTML = `Rating: ${final_stars}`;
 }
 
 matchedCards = 0;
 
 function checkMate() {
-  if(matchedCards.length == 16){
-    clearInterval(timerInt);
-    final_time = timer.innerHTML;
+  if(matchedCards.length === 16){
+    stopTimer();
     gameWon();
   }
 }
-
+checkMate();
 
 function gameWon() {
   stats();
