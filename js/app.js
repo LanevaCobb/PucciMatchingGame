@@ -84,6 +84,7 @@ function initGame(){
       hour = 0;
 
       timer.innerHTML = "0 minutes 0 seconds";
+      startTimer();
 }
 
 initGame();
@@ -106,7 +107,7 @@ function clickDeck(){ deckCards.forEach(function(card) {
         card.classList.add('open', 'show');
 
         if (flipCards.length == 2) {
-           startTimer();
+
            moveCount();
            score();
 	         if (flipCards[0].dataset.card == flipCards[1].dataset.card) {
@@ -179,13 +180,13 @@ function startTimer() {
      hour++;
      min = 0;
    }
-   console.log(time);
+
  }, 1000);
 }
 
 
 function showTime() {
-  console.log(timer);
+  
   timer.innerHTML= time;
 }
 
