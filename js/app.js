@@ -52,7 +52,7 @@ function shuffle(array) {
  */
 //Adds event listener for all the cards
 var timer = document.querySelector('.timer');
-const starList = document.querySelectorAll('.stars li');
+let starList = document.querySelectorAll('.stars li');
 let flipCards = [];
 var moves = 0;
 var moveCount = document.querySelector('.moves');
@@ -61,37 +61,51 @@ let timerInt;
 let card = document.getElementsByClassName("card");
 var deck = document.querySelector('.deck');
 let matchedCards = document.getElementsByClassName("match");
-var timer_off = true;
 var stars = document.querySelectorAll('.fa-star');
 var close_x = document.querySelector('.close');
 
 
+
+var cardHTML = shuffle(cards).map(function(card) {
+ return createCard(card);
+});
+
+deck.innerHTML = cardHTML.join('');
+
+
+//Shuffledeck from https://matthewcranford.com/memory-game-walkthrough-part-4-shuffling-decks/
+function shuffleDeck() {
+  const cardstoShuffle = Array.from(document.querySelectorAll('.deck li'));
+  const shuffledCards = shuffle(cardstoShuffle);
+  for (card of shuffledCards) {
+    deck.appendChild(card);
+    card.classList.remove('show', 'open', 'match');
+  }
+}
+
+
 function initGame(){
 
-      clearInterval(timerInt);
+   shuffleDeck();
 
-      var cardHTML = shuffle(cards).map(function(card) {
-       return createCard(card);
-     });
+   clearInterval(timerInt);
 
-     deck.innerHTML = cardHTML.join('');
+   moves = 0;
+   moveCount.innerHTML = moves;
 
-      moves = 0;
-      moveCount.innerHTML = moves;
+   sec = 0;
+   min = 0;
+   hour = 0;
 
-      sec = 0;
-      min = 0;
-      hour = 0;
-
-      timer.innerHTML = "0 minutes 0 seconds";
-      startTimer();
+   timer.innerHTML = "0 minutes 0 seconds";
+   startTimer();
 }
 
 initGame();
 
 const deckCards = document.querySelectorAll('.card');
 
-function clickDeck(){ deckCards.forEach(function(card) {
+function clickDeck(card) { deckCards.forEach(function(card) {
    card.addEventListener('click', function(event) {
      const clickTarget = event.target;
 
@@ -160,6 +174,7 @@ function clearStar() {
 }
 
 
+
 var min = 0;
 var sec = 0;
 var hour = 0;
@@ -186,7 +201,7 @@ function startTimer() {
 
 
 function showTime() {
-  
+
   timer.innerHTML= time;
 }
 
@@ -194,22 +209,28 @@ function stopTimer() {
   clearInterval(timerInt);
 }
 
+function reset_game() {
+  initGame();
+}
 
+document.querySelector('.restart').addEventListener('click', reset_game);
 
 function toggle_modal() {
   var modal = document.querySelector('.popup');
   modal.classList.toggle('popup_hide');
+
+  stats();
 }
 
 toggle_modal();
-stats();
+
 
 function stats() {
   const timeStat = document.querySelector('.popup_timer');
   const final_time = timer.innerHTML;
   const final_moves = document.querySelector('.popup_moves');
   const final_rating = document.querySelector('.star_rating');
-  const final_stars = score();
+  const final_stars = starList.innerHTML;
 
   final_moves.innerHTML = `You made ${moves} moves`;
   timeStat.innerHTML = `in ${final_time}`;
