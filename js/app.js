@@ -191,8 +191,6 @@ function showStars() {
       }
   }
 
-
-
 var min = 0;
 var sec = 0;
 var hour = 0;
@@ -249,7 +247,7 @@ function stats() {
   const final_time = timer.innerHTML;
   const final_moves = document.querySelector('.popup_moves');
   const final_rating = document.querySelector('.star_rating');
-  const final_stars = starList.innerHTML;
+  const final_stars = document.querySelector('.stars').innerHTML;
 
   final_moves.innerHTML = `You made ${moves} moves`;
   timeStat.innerHTML = `in ${final_time}`;
