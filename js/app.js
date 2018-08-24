@@ -136,6 +136,10 @@ function clickDeck(card) { deckCards.forEach(function(card) {
 
                flipCards = [];
 
+           if(matchedCards.length === 16){
+                 gameWon();
+           }
+
           } else {
 
 	         setTimeout(function() {
@@ -152,10 +156,10 @@ function clickDeck(card) { deckCards.forEach(function(card) {
             movesText.innerHTML = moves;
           }
         }
+
      };
    });
  });
-checkMate(); 
 }
 clickDeck();
 
@@ -226,13 +230,6 @@ function toggle_modal() {
 
 toggle_modal();
 
-function checkMate() {
-
-  if(matchedCards.length === 16){
-    gameWon();
-  }
-}
-checkMate();
 
 
 function stats() {
