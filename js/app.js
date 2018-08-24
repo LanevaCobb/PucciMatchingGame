@@ -124,6 +124,7 @@ function clickDeck(card) { deckCards.forEach(function(card) {
 
            moveCount();
            score();
+
 	         if (flipCards[0].dataset.card == flipCards[1].dataset.card) {
 	             flipCards[0].classList.add('match');
 	             flipCards[0].classList.add('open');
@@ -154,9 +155,10 @@ function clickDeck(card) { deckCards.forEach(function(card) {
      };
    });
  });
+checkMate(); 
 }
-
 clickDeck();
+
 
 function score() {
   if (moves == 12 || moves == 24) {
@@ -224,6 +226,14 @@ function toggle_modal() {
 
 toggle_modal();
 
+function checkMate() {
+
+  if(matchedCards.length === 16){
+    gameWon();
+  }
+}
+checkMate();
+
 
 function stats() {
   const timeStat = document.querySelector('.popup_timer');
@@ -236,15 +246,6 @@ function stats() {
   timeStat.innerHTML = `in ${final_time}`;
   final_rating.innerHTML = `Rating: ${final_stars}`;
 }
-
-matchedCards = 0;
-
-function checkMate() {
-  if(matchedCards.length === 16){
-    gameWon();
-  }
-}
-checkMate();
 
 function gameWon() {
   stopTimer();
