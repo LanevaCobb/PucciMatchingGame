@@ -98,6 +98,9 @@ function initGame(){
    hour = 0;
 
    timer.innerHTML = "0 minutes 0 seconds";
+
+   showStars();
+
    startTimer();
 }
 
@@ -178,6 +181,15 @@ function clearStar() {
         }
     }
 }
+
+function showStars() {
+  for (star of starList) {
+      if (star.style.display = 'none') {
+          star.style.display = 'inline';
+
+          }
+      }
+  }
 
 
 
