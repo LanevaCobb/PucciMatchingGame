@@ -16,10 +16,11 @@ You will:
 
   # An Added Bonus:
   You will receive stars based on the number of moves it took you to match all the cards. The fewer moves, the more stars!!!
-    - 	3 stars - is the  highest ratings as it took you less than 12 moves to clear the board.
+
+    - 	3 stars - is the  highest ratings as it took you less than 12 moves to clear the board.    
 
     - 	2 stars - it took you less than 24 moves to clear the board
-    
+
     - 	1 stars - our lowest rating. Sorry, dude. Better Luck next time. At least you have one star. :)
 
 # When you win the game, you get your stats
