@@ -15,7 +15,7 @@ You will:
   - Clear the board by matching all of the cards to win the game. A timer will start as soon as the game loads
 
   # An Added Bonus:
-  You will receive stars based on the number of moves it took you to match all the cards. The fewer moves, the more stars!!!
+  You will receive stars based on the number of moves it took you to match all the cards. The fewer moves, the more stars!!! A move counts for each pair you try to match.
 
     - 	3 stars - is the  highest ratings as it took you less than 12 moves to clear the board.    
 
@@ -30,4 +30,4 @@ Once you match all the cards on the board, you get a popup detailing your stats
     - how long it took to match all the cards
     - how many moves it took to win the game.
 
-You get to try again by pressing the Play Again button. You can press the reset button to reset the game at any time. Please remember you will lose your stats!
+You get to try again by pressing the Play Again button. You can press the reset button to reset the game at any time. Please remember when you do this, you will lose your stats!
