@@ -50,7 +50,7 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-//Adds event listener for all the cards
+//Global varibles
 var timer = document.querySelector('.timer');
 let starList = document.querySelectorAll('.stars li');
 let flipCards = [];
@@ -83,7 +83,7 @@ function shuffleDeck() {
   }
 }
 
-
+//Starts the game.
 function initGame(){
 
    shuffleDeck();
@@ -106,6 +106,7 @@ function initGame(){
 
 initGame();
 
+//Adds Event listener for each card.
 const deckCards = document.querySelectorAll('.card');
 
 function clickDeck(card) { deckCards.forEach(function(card) {
@@ -121,14 +122,14 @@ function clickDeck(card) { deckCards.forEach(function(card) {
 
      if (!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')) {
         flipCards.push(card);
-        card.classList.add('open', 'show');
+        card.classList.add('open', 'show'); //put cards into the array
 
         if (flipCards.length == 2) {
 
-           moveCount();
-           score();
+           moveCount(); //starts counting moves after first move
+           score(); //clears the stars based on the number of moves
 
-	         if (flipCards[0].dataset.card == flipCards[1].dataset.card) {
+	         if (flipCards[0].dataset.card == flipCards[1].dataset.card) { //match the cards
 	             flipCards[0].classList.add('match');
 	             flipCards[0].classList.add('open');
 	             flipCards[0].classList.add('show');
@@ -139,21 +140,21 @@ function clickDeck(card) { deckCards.forEach(function(card) {
 
                flipCards = [];
 
-           if(matchedCards.length === 16){
+           if(matchedCards.length === 16){ //Checks for number of matched cards to show modal and stats
                  gameWon();
            }
 
           } else {
 
 	         setTimeout(function() {
-              flipCards.forEach(function(card) {
+              flipCards.forEach(function(card) { // if cards does not match, flip back to no show
               card.classList.remove('open', 'show');
               });
 
               flipCards = [];
             }, 1000);
           }
-          function moveCount(){
+          function moveCount(){ // counts moves
              moves++;
             var movesText = document.querySelector('.moves')
             movesText.innerHTML = moves;
@@ -167,13 +168,13 @@ function clickDeck(card) { deckCards.forEach(function(card) {
 clickDeck();
 
 
-function score() {
+function score() { //handles the rating
   if (moves == 12 || moves == 24) {
    clearStar();
  }
 }
 
-function clearStar() {
+function clearStar() { //removes one star at a time.
   for (star of starList) {
     if (star.style.display !== 'none') {
         star.style.display = 'none';
@@ -229,9 +230,9 @@ function reset_game() {
   initGame();
 }
 
-document.querySelector('.restart').addEventListener('click', reset_game);
+document.querySelector('.restart').addEventListener('click', reset_game); //Add functionality to restart button
 
-function toggle_modal() {
+function toggle_modal() { //toggle for the modal- on/off
   var modal = document.querySelector('.popup');
   modal.classList.toggle('popup_hide');
 
@@ -242,7 +243,7 @@ toggle_modal();
 
 
 
-function stats() {
+function stats() { //pulls all data needed to show stats on modal.
   const timeStat = document.querySelector('.popup_timer');
   const final_time = timer.innerHTML;
   const final_moves = document.querySelector('.popup_moves');
@@ -254,7 +255,7 @@ function stats() {
   final_rating.innerHTML = `Rating: ${final_stars}`;
 }
 
-function gameWon() {
+function gameWon() { //executes when all matched cards are displayed.
   stopTimer();
   stats();
   toggle_modal();

@@ -189,6 +189,8 @@ h1 {
   display: none;
 }
 
+
+/*Media queries to maintain 4x4 grid for smaller screens*/
 @media (min-width: 320px) {
   .score-panel, .header {
     width: 50%;
@@ -254,6 +256,7 @@ h1 {
 
 }
 
+/* Media query for larger screens*/
 @media (min-width: 720px) {
 
   .score-panel {
